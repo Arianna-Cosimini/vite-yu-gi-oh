@@ -1,13 +1,16 @@
 <script>
+import { store } from '../store.js';
+
 
 export default {
 
+    data() {
+        return {
+            store,
+        }
+    },
+
     name: 'CardsList',
-
-
-    props: {
-        cards: Array,
-    }
 
 
 }
@@ -21,12 +24,12 @@ export default {
         <div class="container-small">
             <div class="found-cards">
                 <span>
-                    Founds {{ cards.length }} Cards
+                    Founds {{ store.cards.length }} Cards
                 </span>
             </div>
     
             <div class="cards">
-                <div v-for="currentCard in cards" class="card">
+                <div v-for="currentCard in store.cards" class="card">
                     <div class="img-card">
                         <img :src="currentCard.card_images[0].image_url" alt="">
     
@@ -56,7 +59,7 @@ export default {
 
 <style lang="scss">
 .container-big {
-    max-width: 1600px;
+    max-width: 1200px;
     margin: 0 auto;
     background-color: #fff;
     color: black;
@@ -71,7 +74,7 @@ export default {
 }
 
 .container-small{
-    max-width:1500px;
+    max-width:1100px;
     margin: 0 auto;
 }
 
