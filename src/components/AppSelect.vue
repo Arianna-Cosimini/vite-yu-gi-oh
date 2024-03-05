@@ -25,9 +25,9 @@ export default {
 <template>
 
 
-    <select class="form-select w-25" aria-label="Default select example">
+    <select v-model="store.selectText" @change="$emit('search')" class="form-select w-25" aria-label="Default select example">
 
-        <option v-for="currentArchetype in archetypes" value="1">{{ currentArchetype.archetype_name }}</option>
+        <option  v-for="currentArchetype in archetypes" value="1">{{ currentArchetype.archetype_name }}</option>
     </select>
 </template>
 

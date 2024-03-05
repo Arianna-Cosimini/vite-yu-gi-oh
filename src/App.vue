@@ -52,20 +52,32 @@ export default {
     searchArchetype() {
       axios.get('https://db.ygoprodeck.com/api/v7/archetypes.php')
         .then(res => {
-          this.archetypes = res.data; 
+          this.archetypes = res.data;
+        })
+        .catch(error => {
+          console.error('Si è verificato un errore durante la ricerca degli archetipi:', error);
+        });
+    },
+    getArchetypes() {
+
+      axios.get('https://db.ygoprodeck.com/api/v7/archetypes.php')
+        .then(res => {
+          this.archetypes = res.data;
+          console.log(res.data)
         })
         .catch(error => {
           console.error('Si è verificato un errore durante la ricerca degli archetipi:', error);
         });
     }
   },
+
 }
 
 </script>
 
 <template>
   <AppNav></AppNav>
-  <AppSelect :archetypes="archetypes"></AppSelect>
+  <AppSelect @search="getArchetypes()" :archetypes="archetypes"></AppSelect>
   <CardsList :cards="cards"></CardsList>
 
 </template>
