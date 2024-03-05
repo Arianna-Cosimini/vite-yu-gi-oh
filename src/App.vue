@@ -22,6 +22,8 @@ export default {
       currentPage: 1,
       resultsPerPage: 50,
       store,
+      archetypes: [],
+
     }
   },
 
@@ -47,13 +49,14 @@ export default {
         })
     },
 
-    searchArchetype(){
+    searchArchetype() {
       axios.get('https://db.ygoprodeck.com/api/v7/archetypes.php')
         .then(res => {
-
-          this.store.archetype = res.archetype
-          console.log(res.data.archetype)
+          this.archetypes = res.data; 
         })
+        .catch(error => {
+          console.error('Si è verificato un errore durante la ricerca degli archetipi:', error);
+        });
     }
   },
 }
@@ -62,7 +65,7 @@ export default {
 
 <template>
   <AppNav></AppNav>
-  <AppSelect></AppSelect>
+  <AppSelect :archetypes="archetypes"></AppSelect>
   <CardsList :cards="cards"></CardsList>
 
 </template>
