@@ -1,8 +1,14 @@
 <script>
+import AppSelect from './AppSelect.vue';
+
 
 export default {
 
     name: 'AppNav',
+
+    components : {
+        AppSelect,
+    }
 
   
   }
@@ -13,8 +19,8 @@ export default {
 
 <nav>
     <div class="text-nav">
-        <img src="" alt="">
         <h1>Yu-Gi-Oh Api</h1>
+        
     </div>
 </nav>
   
@@ -31,6 +37,7 @@ nav{
 
 .text-nav{
     display: flex;
+    justify-content: space-between;
 }
 
 </style>

@@ -5,8 +5,8 @@ import { store } from '../store.js';
 export default {
 
     props: {
-        archetypes: Array, 
-           
+        archetypes: Array,
+
     },
 
     data() {
@@ -23,12 +23,31 @@ export default {
 </script>
 
 <template>
+    <nav>
+        <div class="text-nav">
+            <h1>Yu-Gi-Oh Api</h1>
 
+            <select v-model="store.selectText" @change="$emit('search')" class="form-select w-25"
+                aria-label="Default select example">
 
-    <select v-model="store.selectText" @change="$emit('search')" class="form-select w-25" aria-label="Default select example">
+                <option v-for="currentArchetype in archetypes" :value="currentArchetype.archetype_name">{{
+                currentArchetype.archetype_name }}</option>
+            </select>
+        </div>
+    </nav>
 
-        <option  v-for="currentArchetype in archetypes" value="1">{{ currentArchetype.archetype_name }}</option>
-    </select>
 </template>
 
-<style lang="scss"></style>
+<style lang="scss">
+nav {
+    background-color: #fff;
+    color: black;
+
+    padding: 10px;
+}
+
+.text-nav {
+    display: flex;
+    justify-content: space-between;
+}
+</style>

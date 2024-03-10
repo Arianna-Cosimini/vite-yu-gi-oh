@@ -11,7 +11,7 @@ export default {
 
   components: {
     CardsList,
-    AppNav,
+    // AppNav,
     AppSelect,
   },
 
@@ -46,7 +46,7 @@ export default {
         .then(res => {
           console.log(res.data.data);
           this.store.cards = res.data.data;
-        })
+        });
     },
 
     searchArchetype() {
@@ -59,26 +59,29 @@ export default {
         });
     },
     getArchetypes() {
+      const offset = (this.currentPage - 1) * this.resultsPerPage;
 
-      axios.get('https://db.ygoprodeck.com/api/v7/archetypes.php')
+      axios
+        .get(`https://db.ygoprodeck.com/api/v7/cardinfo.php?num=${this.resultsPerPage}&offset=${offset}&archetype=` + this.store.selectText)
         .then(res => {
-          this.archetypes = res.data;
-          console.log(res.data)
-        })
-        .catch(error => {
-          console.error('Si è verificato un errore durante la ricerca degli archetipi:', error);
+          console.log(res.data.data);
+          this.store.cards = res.data.data;
         });
-    }
   },
 
+}
 }
 
 </script>
 
 <template>
-  <AppNav></AppNav>
-  <AppSelect @search="getArchetypes()" :archetypes="archetypes"></AppSelect>
-  <CardsList :cards="cards"></CardsList>
+
+  <div class="container">
+    <!-- <AppNav></AppNav> -->
+    <AppSelect @search="getArchetypes()" :archetypes="archetypes"></AppSelect>
+    <CardsList :cards="cards"></CardsList>
+
+  </div>
 
 </template>
 
